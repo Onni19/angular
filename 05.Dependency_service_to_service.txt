@@ -1,0 +1,121 @@
+
+ service create :
+ =======================
+ ng g s services/depend
+ 
+ 
+ 
+depend.service.ts
+======================
+import {Injectable} from '@angular/core';
+
+@Injectable({
+  providedIn:'root'
+})
+
+export class dependService{
+
+    message = "My Service Data";
+
+	constructor(){}
+	
+	log(){
+	  return this.message;
+	}
+	
+	
+	
+	}
+}
+ 
+ 
+
+channel.service.ts
+======================
+import {Injectable} from '@angular/core';
+import{dependService} from '../services/depend.service';
+
+@Injectable({
+  providedIn:'root'
+})
+
+export class channelService{
+
+	constructor(private dService: dependService){
+		console.log(dService.log());
+	}
+	
+	display(){
+	  return "Welcome";
+	}
+	
+	getValue(v:string){
+	console.log(v);
+	
+	}
+}
+
+
+
+First Component.ts
+=============================
+
+import{Component.OnInt} from '@angular/core';
+import{ChannelService} from '../services/channel.service';
+
+@Component({
+	selector:'app-first',
+	templateUrl:'./first.component.hmtl',
+	styleUtls:['./first.component.css']
+
+})
+export class FirstComponent implements OnInit{
+
+	title="Angular";
+	
+	//print an array
+	
+	items: any[] = ['one','two','three'];
+
+	constructor(private chService: ChannelService){
+	}
+
+	ngOnInit():void{
+	this.f();
+	}
+
+
+	f(){
+	
+	this.chService.getValue(this.title);
+	// this function send the title value to the service function service_to_
+
+	}
+	
+	
+	message(){
+	 return this.chService.display;
+	}
+	
+	
+	
+	
+}
+app.component.html
+============================
+<app-first></app-first>
+
+First Component.html:
+====================
+<h1 *ngIf="title"> {{title}} </h1>
+
+	<ul *ngFor="let item of items">
+		<li>
+			<p>{{item}}</p>
+		</li>
+	</ul>
+	
+<p>{{sum}}</p>
+<p>{{message}}</p>
+
+

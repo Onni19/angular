@@ -1,0 +1,67 @@
+
+ Angular Template ,Directives:
+================================
+
+Directives are classes that add additional
+behavior to elements in angular application.
+
+app.component.html
+============================
+<app-first></app-first>
+
+First Component.html:
+====================
+<h1 *ngIf="title"> {{title}} </h1>
+
+	<ul *ngFor="let item of items">
+		<li>
+			<p>{{item}}</p>
+		</li>
+	</ul>
+	
+<p>{{sum}}</p>
+
+
+
+First Component.ts
+=============================
+
+import{Component.OnInt} from '@angular/core';
+
+@Component({
+	selector:'app-first',
+	templateUrl:'./first.component.hmtl',
+	styleUtls:['./first.component.css']
+
+})
+export class FirstComponent implements OnInit{
+
+	title="Angular";
+	
+	//print an array
+	
+	items: any[] = ['one','two','three'];
+
+	constructor(){}
+
+	ngOnInit():void{
+	this.f();
+	}
+
+
+	f(){
+	 return this.title;
+
+	}
+	
+	sum(){
+		return 10+10;
+	}
+}
+
+ 
+ 
+
+
+
+Second Component

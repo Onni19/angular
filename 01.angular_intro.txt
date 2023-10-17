@@ -1,0 +1,39 @@
+
+
+app.component.html
+============================
+<app-first></app-first>
+
+First Component.html:
+====================
+<p>First Works</p>
+
+First Component.ts
+=============================
+
+import{Component.OnInt} from '@angular/core';
+
+@Component({
+	selector:'app-first',
+	templateUrl:'./first.component.hmtl',
+	styleUtls:['./first.component.css']
+
+})
+export class FirstComponent implements OnInit{
+
+	title="Angular"
+
+	constructor(){}
+
+	ngOnInit():void{
+	this.f();
+	}
+
+
+	f(){
+	
+	console.log("Hello Bangladesh");
+	console.log(this.title);
+
+	}
+}

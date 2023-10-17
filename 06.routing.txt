@@ -1,0 +1,123 @@
+
+service create :
+=======================
+ ng g c second
+ 
+Second Component.html:
+====================
+ <a [routerLink]="['/']" router-link-active="router-link-active">Go to link first</a>
+
+ 
+
+
+
+First Component.ts
+=============================
+
+import{Component.OnInt} from '@angular/core';
+import{ChannelService} from '../services/channel.service';
+
+@Component({
+	selector:'app-first',
+	templateUrl:'./first.component.hmtl',
+	styleUtls:['./first.component.css']
+
+})
+export class FirstComponent implements OnInit{
+
+	title="Angular";
+	
+	//print an array
+	
+	items: any[] = ['one','two','three'];
+
+	constructor(private chService: ChannelService){
+	}
+
+	ngOnInit():void{
+	this.f();
+	}
+
+
+	f(){
+	
+	this.chService.getValue(this.title);
+	// this function send the title value to the service function service_to_
+
+	}
+	
+	
+	message(){
+	 return this.chService.display;
+	}
+	
+	
+}
+
+
+First Component.html:
+====================
+<h1 *ngIf="title"> {{title}} </h1>
+
+	<ul *ngFor="let item of items">
+		<li>
+			<p>{{item}}</p>
+		</li>
+	</ul>
+	
+<p>{{sum}}</p>
+<p>{{message}}</p>
+
+
+<a [routerLink]="['/s']" router-link-active="router-link-active">Go to link</a>
+
+app.module
+======================
+
+import{NgModule} from '@angular/core';
+import{BrowseModule} from '@angular/platform-browser';
+import{RouterModule,Routes} from '@angular/router';
+
+import{AppComponent} from './app.component';
+import{FirstComponent} from './first/first.component';
+import{SecondComponent} from './second/second.component';
+import{SecondComponent} from './fa/fa.component';
+import{SecondComponent} from './fb/fb.component';
+
+
+const routes:Routes =[
+
+	{
+	path: '',component: FirstComponent,
+	children:[
+	  {path : 'fa-a',component:FaComponent},
+	  {path : 'fa-b',component:FbComponent},
+	]
+	},{
+	path: 's',component: SecondComponent
+	}
+
+]
+
+@ngModule([
+  declarations :[
+	AppComponent,
+	FirstComponent,
+	SecondComponent
+  ],
+  imports:[
+    BrowseModule,
+	RouterModule.forRoot(routes)
+  ],
+
+])
+
+
+
+
+app.component.html
+============================
+<div>
+	<router-outlet></router-outlet>
+</div>
+
