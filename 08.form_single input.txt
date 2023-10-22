@@ -1,0 +1,151 @@
+1.Reactive Form and
+2.Template-driven form:
+========================================
+
+4 classes required to design the angular forms
+===================================================
+1.FormControl
+2.FormGroup
+3.FormArray
+4.ControlValue
+
+1.add app.module:   ReactiveFormsModule,
+					FormsModule
+	   
+	   
+app.module 
+======================
+
+import{NgModule} from '@angular/core';
+import{BrowseModule} from '@angular/platform-browser';
+
+import{AppComponent} from './app.component';
+import{FirstComponent} from './first/first.component';
+import{SecondComponent} from './second/second.component';
+import{SecondComponent} from './fa/fa.component';
+import{SecondComponent} from './fb/fb.component';
+
+
+
+@ngModule([
+  declarations :[
+	AppComponent,
+	FirstComponent,
+	SecondComponent
+  ],
+  imports:[
+    BrowseModule,
+	AppRoutingModule,
+	ReactiveFormsModule,
+	FormsModule
+  ],
+  provider:[],
+  bootstrap: [AppComponent]
+
+])
+
+export class AppModule
+
+
+2.
+ second.component.ts
+ ==========================
+ import { Component, OnInit } from '@angular/core';
+ import { FormControl } from '@angular/forms';// for single input
+ 
+ 
+ @Component({
+  selector: 'app-second',
+  templateUrl: './second.component.html',
+  styleUrls: ['./second.component.scss']
+})
+ 
+ 
+ export class SecondComponent implements OnInit {
+ 
+	constructor(){}
+	ngOnInIt():void{}
+ 
+ }
+ //1.Reactive Form
+ color = new FormControl('');
+ 
+ 
+ //2.Template-driven form:
+ 
+ name='';
+ 
+
+
+ second.component.html
+ =====================================
+ 
+  <h1>1.Reactive Form</h1>
+  
+ <label for="color">Color
+		<input type="text" [FormControl]= "color">
+ </label>
+ 
+
+ <p> {{color.value}}</p> //check input value
+ 
+   <h1>Template-driven Form</h1>
+
+ 
+ <label for="name">
+		<input type="text" [(ngModel)]= "name">
+ </label>
+ 
+ 
+  <p> {{name.value}}</p> //check input value
+ 
+  <a [routerLink]="['/']" router-link-active="router-link-active">Go to link first</a>
+
+ 
+ 
+
+ ###########################################################
+ 
+app-routing-module.ts
+============================
+import{RouterModule,Routes} from '@angular/router';
+
+
+import{FirstComponent} from './first/first.component';
+import{SecondComponent} from './second/second.component';
+import{SecondComponent} from './fa/fa.component';
+import{SecondComponent} from './fb/fb.component';
+
+const routes:Routes =[
+
+	{
+	path: '',component: FirstComponent,
+	children:[
+	  {path : 'fa-a',component:FaComponent},
+	  {path : 'fa-b',component:FbComponent},
+	]
+	},{
+	path: 's',component: SecondComponent
+	}
+	
+	@ngModule([
+  declarations :[
+	
+  ],
+  imports:[
+    CommonModule,
+	RouterModule.forRoot(routes)
+  ],
+export:[RouterModule]
+])
+	
+	
+
+
+
+app.component.html
+============================
+<div>
+	<router-outlet></router-outlet>
+</div>
+

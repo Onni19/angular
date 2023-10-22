@@ -1,4 +1,10 @@
 
+app.component.html
+============================
+<div>
+	<router-outlet></router-outlet>
+</div>
+
 service create :
 =======================
  ng g c second
@@ -114,10 +120,4 @@ const routes:Routes =[
 
 
 
-
-app.component.html
-============================
-<div>
-	<router-outlet></router-outlet>
-</div>
 

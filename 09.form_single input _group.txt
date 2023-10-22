@@ -1,0 +1,180 @@
+1.Reactive Form and
+2.Template-driven form:
+========================================
+
+4 classes required to design the angular forms
+===================================================
+1.FormControl
+2.FormGroup
+3.FormArray
+4.ControlValue
+
+1.add app.module:   ReactiveFormsModule,
+					FormsModule
+	   
+	   
+app.module 
+======================
+
+import{NgModule} from '@angular/core';
+import{BrowseModule} from '@angular/platform-browser';
+
+import{AppComponent} from './app.component';
+import{FirstComponent} from './first/first.component';
+import{SecondComponent} from './second/second.component';
+import{SecondComponent} from './fa/fa.component';
+import{SecondComponent} from './fb/fb.component';
+
+
+
+@ngModule([
+  declarations :[
+	AppComponent,
+	FirstComponent,
+	SecondComponent
+  ],
+  imports:[
+    BrowseModule,
+	AppRoutingModule,
+	ReactiveFormsModule,
+	FormsModule
+  ],
+  provider:[],
+  bootstrap: [AppComponent]
+
+])
+
+export class AppModule
+
+
+2.
+ second.component.ts
+ ==========================
+ import { Component, OnInit } from '@angular/core';
+ import { FormControl, FromGroup} from '@angular/forms';// for single input
+ 
+ 
+ @Component({
+  selector: 'app-second',
+  templateUrl: './second.component.html',
+  styleUrls: ['./second.component.scss']
+})
+ 
+ 
+ export class SecondComponent implements OnInit {
+ 
+	constructor(){}
+	ngOnInIt():void{}
+	
+	
+	myform = new FormGroup[{
+		username: new FormControl(''),
+		password: new FormControl('')
+	}]
+ //button add 
+ 
+	onSubmit(){
+		console.warn(this.myform.value);}
+ 
+ }
+
+
+
+ second.component.html
+ =====================================
+ 
+  <h1>1.Reactive Form</h1>
+  
+  
+  <form [FormGroup]="myform">
+  
+	  <label for="username">username:
+			<input type="text" FormControlName= "username">
+	 </label>
+
+ 
+	 <label for="password">password:
+			<input type="text" FormControlName= "password">
+	 </label>
+	 
+	 
+	 <input type="submit" value=submit>
+	 <button type>
+  </form>
+ 
+
+  <p> {{myform.value | json }}</p> //check input value
+  
+  
+ <h1> if we add button </h1>
+  
+  <form [FormGroup]="myform" (ngSubmit)="onSubmit()">
+  
+	  <label for="username">username:
+			<input type="text" FormControlName= "username">
+	 </label>
+
+ 
+	 <label for="password">password:
+			<input type="text" FormControlName= "password">
+	 </label>
+	 
+	 
+	 <button type="button"> submit</button>
+  </form>
+ 
+
+  <p> {{myform.value | json }}</p> //check input value
+ 
+  <a [routerLink]="['/']" router-link-active="router-link-active">Go to link first</a>
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+app-routing-module.ts
+============================
+import{RouterModule,Routes} from '@angular/router';
+
+
+import{FirstComponent} from './first/first.component';
+import{SecondComponent} from './second/second.component';
+import{SecondComponent} from './fa/fa.component';
+import{SecondComponent} from './fb/fb.component';
+
+const routes:Routes =[
+
+	{
+	path: '',component: FirstComponent,
+	children:[
+	  {path : 'fa-a',component:FaComponent},
+	  {path : 'fa-b',component:FbComponent},
+	]
+	},{
+	path: 's',component: SecondComponent
+	}
+	
+	@ngModule([
+  declarations :[
+	
+  ],
+  imports:[
+    CommonModule,
+	RouterModule.forRoot(routes)
+  ],
+export:[RouterModule]
+])
+	
+	
+
+
+
+app.component.html
+============================
+<div>
+	<router-outlet></router-outlet>
+</div>
+
